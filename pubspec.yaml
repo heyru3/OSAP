@@ -1,0 +1,34 @@
+name: osap
+version: 1.0.0+1
+publish_to: none
+description: A new Flutter project.
+environment:
+  sdk: '>=2.16.1 <3.0.0'
+
+dependencies:
+  cupertino_icons: ^1.0.2
+  flutter:
+    sdk: flutter
+  font_awesome_flutter: ^10.1.0
+  get: 4.6.1
+  
+  hexcolor: ^2.0.6
+  introduction_screen: ^3.0.2
+  lottie: ^1.2.2
+  tap_canvas: ^0.9.4
+
+dev_dependencies:
+  flutter_lints: ^1.0.0
+  flutter_test:
+    sdk: flutter
+  lints: 1.0.1
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/lottie/
+    - assets/image/
+  fonts:
+    - family: openSans
+      fonts:
+        - asset: fonts/OpenSans-Regular.ttf
