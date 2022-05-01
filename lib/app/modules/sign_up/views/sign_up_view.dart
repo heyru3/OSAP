@@ -14,6 +14,7 @@ class SignUpView extends GetView<SignUpController> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        elevation: 0,
         flexibleSpace: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -232,7 +233,7 @@ class SignUpView extends GetView<SignUpController> {
                                 controller.formKey.currentState!.save();
 
                                 //Todo:implement Function to
-                                Get.toNamed(Routes.HOME);
+                                Get.toNamed(Routes.RESEARCHER);
                               }
                             },
                           ),

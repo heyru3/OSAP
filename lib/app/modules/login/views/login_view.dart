@@ -18,6 +18,7 @@ class LoginView extends GetView<LoginController> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        elevation:0,
         flexibleSpace: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -111,7 +112,7 @@ class LoginView extends GetView<LoginController> {
                                     .validate()) {
                                   controller.loginFormKey.currentState!.save();
                                   //Todo:implement Function to
-                                  Get.toNamed(Routes.HOME);
+                                  Get.toNamed(Routes.RESEARCHER);
                                 }
                               },
                               child: Padding(
