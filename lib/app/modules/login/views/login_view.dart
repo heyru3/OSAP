@@ -75,9 +75,7 @@ class LoginView extends GetView<LoginController> {
                           },
                           keyboardType: TextInputType.emailAddress,
                         ),
-                        SizedBox(
-                          height: 30,
-                        ),
+                        SizedBox(height: 30 ),
                         TextFormField(
                           controller: controller.passwordController,
                           obscureText: true,
