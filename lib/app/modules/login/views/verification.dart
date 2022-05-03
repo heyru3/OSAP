@@ -1,17 +1,16 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:osap/app/modules/login/controllers/login_controller.dart';
-import 'package:osap/app/routes/app_pages.dart';
+import 'package:osap/app/modules/login/controllers/verification_controller.dart';
+import 'package:osap/app/modules/researcher/bindings/researcher_binding.dart';
+import 'package:osap/app/modules/researcher/views/researcher_view.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
 
 import '../../../data/common/theme_helper.dart';
 import '../../../data/widget/header.dart';
 
-class ForgotPasswordVerificationPage extends GetView {
-  LoginController controller = Get.put(LoginController());
-
+class Verification extends GetView<VerificationController> {
   @override
   Widget build(BuildContext context) {
     double _headerHeight = 300;
@@ -43,8 +42,9 @@ class ForgotPasswordVerificationPage extends GetView {
                               'Verification',
                               style: TextStyle(
                                   fontSize: 35,
+                                  fontFamily: 'openSans',
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.black54),
+                                  color: Colors.black),
                               // textAlign: TextAlign.center,
                             ),
                             SizedBox(
@@ -53,7 +53,7 @@ class ForgotPasswordVerificationPage extends GetView {
                             Text(
                               'Enter the verification code we just sent you on your email address.',
                               style: TextStyle(
-                                  // fontSize: 20,
+                                  fontFamily: 'openSans',
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black54),
                               // textAlign: TextAlign.center,
@@ -67,14 +67,18 @@ class ForgotPasswordVerificationPage extends GetView {
                         child: Column(
                           children: <Widget>[
                             OTPTextField(
+                              controller: controller.otpFieldController,
                               length: 4,
                               width: 300,
                               fieldWidth: 50,
                               style: TextStyle(fontSize: 30),
                               textFieldAlignment: MainAxisAlignment.spaceAround,
                               fieldStyle: FieldStyle.underline,
+                              onChanged: (value) {},
                               onCompleted: (pin) {
                                 controller.pinSuccess.value = true;
+                                print(controller.pinSuccess);
+                                //Todo:verification function will be sent
                               },
                             ),
                             SizedBox(height: 50.0),
@@ -91,6 +95,8 @@ class ForgotPasswordVerificationPage extends GetView {
                                     text: 'Resend',
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {
+                                        controller.otpFieldController.clear;
+
                                         showDialog(
                                           context: context,
                                           builder: (BuildContext context) {
@@ -111,9 +117,9 @@ class ForgotPasswordVerificationPage extends GetView {
                             SizedBox(height: 40.0),
                             Container(
                               decoration: controller.pinSuccess.value
-                                  ? ThemeHelper().buttonBoxDecoration(context)
-                                  : ThemeHelper().buttonBoxDecoration(
-                                      context, "#AAAAAA", "#757575"),
+                                  ? ThemeHelper().buttonBoxDecoration(
+                                      context, "#AAAAAA", "#757575")
+                                  : ThemeHelper().buttonBoxDecoration(context),
                               child: ElevatedButton(
                                 style: ThemeHelper().buttonStyle(),
                                 child: Padding(
@@ -130,9 +136,13 @@ class ForgotPasswordVerificationPage extends GetView {
                                 ),
                                 onPressed: controller.pinSuccess.value
                                     ? () {
-                                        Get.toNamed(Routes.RESEARCHER);
+                                        print(controller.pinSuccess);
                                       }
-                                    : null,
+                                    : () {
+                                        print(controller.pinSuccess);
+                                        Get.to(ResearcherView(),
+                                            binding: ResearcherBinding());
+                                      },
                               ),
                             ),
                           ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:osap/app/data/widget/header.dart';
+import 'package:osap/app/modules/researcher/bindings/researcher_binding.dart';
 import 'package:osap/app/modules/researcher/views/profile_view.dart';
 import 'package:osap/app/modules/researcher/views/questionery_view.dart';
 import 'package:osap/app/modules/researcher/views/result_view.dart';
@@ -49,7 +50,7 @@ class ResearcherView extends GetView<ResearcherController> {
                 GestureDetector(
                   onTap: () {
                     //Todo:The notification container must be dynamic
-                    Get.to(ProfileView());
+                    Get.to(ProfileView(), binding: ResearcherBinding());
                   },
                   child: Icon(Icons.notifications),
                 ),
@@ -134,7 +135,7 @@ class ResearcherView extends GetView<ResearcherController> {
                       color: Theme.of(context).colorScheme.secondary),
                 ),
                 onTap: () {
-                  Get.to(QuestioneryView());
+                  Get.to(QuestioneryView(), binding: ResearcherBinding());
                 },
               ),
               Divider(
@@ -153,7 +154,7 @@ class ResearcherView extends GetView<ResearcherController> {
                       color: Theme.of(context).colorScheme.secondary),
                 ),
                 onTap: () {
-                  Get.to(ProfileView());
+                  Get.to(ProfileView(), binding: ResearcherBinding());
                 },
               ),
               Divider(
@@ -172,7 +173,7 @@ class ResearcherView extends GetView<ResearcherController> {
                       color: Theme.of(context).colorScheme.secondary),
                 ),
                 onTap: () {
-                  Get.to(FeedbackView());
+                  Get.to(FeedbackView(), binding: ResearcherBinding());
                 },
               ),
               Divider(
@@ -193,7 +194,7 @@ class ResearcherView extends GetView<ResearcherController> {
                       color: Theme.of(context).colorScheme.secondary),
                 ),
                 onTap: () {
-                  Get.to(ResultView());
+                  Get.to(ResultView(), binding: ResearcherBinding());
                 },
               ),
               Divider(
@@ -340,6 +341,9 @@ class ResearcherView extends GetView<ResearcherController> {
                         ),
                         textAlign: TextAlign.start,
                       ),
+                    ),
+                    SizedBox(
+                      height: 15,
                     ),
                   ],
                 ),

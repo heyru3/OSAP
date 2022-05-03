@@ -1,7 +1,5 @@
 import 'package:get/get.dart';
-import 'package:osap/app/modules/home/bindings/home_binding.dart';
 import 'package:osap/app/modules/home/views/home_view.dart';
-import 'package:osap/app/modules/introduction/bindings/introduction_binding.dart';
 import 'package:osap/app/modules/introduction/views/introduction_view.dart';
 import 'package:osap/app/modules/login/bindings/login_binding.dart';
 import 'package:osap/app/modules/login/views/login_view.dart';
@@ -23,12 +21,12 @@ class AppPages {
     GetPage(
       name: _Paths.HOME,
       page: () => HomeView(),
-      binding: HomeBinding(),
+      
     ),
     GetPage(
       name: _Paths.INTRODUCTION,
       page: () => IntroductionView(),
-      binding: IntroductionBinding(),
+      
     ),
     GetPage(
       name: _Paths.LOGIN,

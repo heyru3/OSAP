@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-import 'package:osap/app/routes/app_pages.dart';
+import 'package:osap/app/modules/login/bindings/login_binding.dart';
+import 'package:osap/app/modules/login/views/login_view.dart';
+import 'package:osap/app/modules/sign_up/bindings/sign_up_binding.dart';
+import 'package:osap/app/modules/sign_up/views/sign_up_view.dart';
 
 import '../../../data/widget/header.dart';
-import '../controllers/home_controller.dart';
 
-class HomeView extends GetView<HomeController> {
+class HomeView extends GetView {
   final double _headerHeight = 200;
-  late double _devWidth;
-  late double _devHeight;
+  late final double _devWidth;
+  late final double _devHeight;
   @override
   Widget build(BuildContext context) {
     _devHeight = MediaQuery.of(context).size.height;
@@ -18,6 +20,19 @@ class HomeView extends GetView<HomeController> {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: <Color>[
+                Theme.of(context).primaryColor,
+                Theme.of(context).colorScheme.secondary,
+              ])),
+        ),
+      ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
@@ -103,7 +118,7 @@ class HomeView extends GetView<HomeController> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Get.toNamed(Routes.LOGIN);
+                          Get.to(LoginView(), binding: LoginBinding());
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -139,7 +154,7 @@ class HomeView extends GetView<HomeController> {
                       SizedBox(width: 5),
                       GestureDetector(
                         onTap: () {
-                          Get.toNamed(Routes.SIGN_UP);
+                          Get.to(SignUpView(), binding: SignUpBinding());
                         },
                         child: Container(
                           decoration: BoxDecoration(

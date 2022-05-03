@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+
 class LoginController extends GetxController {
-
-  final formKey = GlobalKey<FormState>();
-  RxBool pinSuccess = false.obs;
-
-  final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
+  GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
   late TextEditingController emailController, passwordController;
   var email = '';
   var password = '';
@@ -22,6 +19,7 @@ class LoginController extends GetxController {
   void onClose() {
     emailController.dispose();
     passwordController.dispose();
+    
     super.onClose();
   }
 

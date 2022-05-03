@@ -5,9 +5,9 @@ import 'package:introduction_screen/introduction_screen.dart';
 import 'package:lottie/lottie.dart';
 import 'package:osap/app/routes/app_pages.dart';
 
-import '../controllers/introduction_controller.dart';
 
-class IntroductionView extends GetView<IntroductionController> {
+
+class IntroductionView extends GetView {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);

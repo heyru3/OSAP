@@ -1,22 +1,14 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:osap/app/routes/app_pages.dart';
+import 'package:osap/app/modules/login/bindings/login_binding.dart';
+import 'package:osap/app/modules/login/controllers/forgot_password_controller.dart';
 
 import '../../../data/common/theme_helper.dart';
 import '../../../data/widget/header.dart';
-import 'forgot_password_verification_page.dart';
+import 'verification.dart';
 
-class ForgotPasswordPage extends StatefulWidget {
-  const ForgotPasswordPage({Key? key}) : super(key: key);
-
-  @override
-  _ForgotPasswordPageState createState() => _ForgotPasswordPageState();
-}
-
-class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
-  final _formKey = GlobalKey<FormState>();
-
+class ForgotPassword extends GetView<ForgotPasswordController> {
   @override
   Widget build(BuildContext context) {
     double _headerHeight = 300;
@@ -46,10 +38,11 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                             Text(
                               'Forgot Password?',
                               style: TextStyle(
-                                  fontSize: 35,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black54),
-                              // textAlign: TextAlign.center,
+                                fontSize: 35,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                                fontFamily: 'openSans',
+                              ),
                             ),
                             SizedBox(
                               height: 10,
@@ -57,10 +50,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                             Text(
                               'Enter the email address associated with your account.',
                               style: TextStyle(
-                                  // fontSize: 20,
+                                  fontFamily: 'openSans',
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black54),
-                              // textAlign: TextAlign.center,
                             ),
                             SizedBox(
                               height: 10,
@@ -68,17 +60,16 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                             Text(
                               'We will email you a verification code to check your authenticity.',
                               style: TextStyle(
-                                color: Colors.black38,
-                                // fontSize: 20,
-                              ),
-                              // textAlign: TextAlign.center,
+                                  color: Colors.black38,
+                                  fontFamily: 'openSans'),
                             ),
                           ],
                         ),
                       ),
                       SizedBox(height: 40.0),
                       Form(
-                        key: _formKey,
+                        key: controller.forgotPasswordForm,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         child: Column(
                           children: <Widget>[
                             Container(
@@ -87,16 +78,14 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                     hintText: 'Enter your email',
                                     iconData: Icons.email_outlined,
                                     labelText: 'Email'),
-                                validator: (val) {
-                                  if (val!.isEmpty) {
-                                    return "Email can't be empty";
-                                  } else if (!RegExp(
-                                          r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$")
-                                      .hasMatch(val)) {
-                                    return "Enter a valid email address";
-                                  }
-                                  return null;
+                                onSaved: (value) {
+                                  controller.loginController.email = value!;
                                 },
+                                validator: (value) {
+                                  return controller.loginController
+                                      .validateEmail(value!);
+                                },
+                                keyboardType: TextInputType.emailAddress,
                               ),
                               decoration:
                                   ThemeHelper().inputBoxDecorationShadow(),
@@ -120,13 +109,11 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                   ),
                                 ),
                                 onPressed: () {
-                                  if (_formKey.currentState!.validate()) {
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              ForgotPasswordVerificationPage()),
-                                    );
+                                  if (controller
+                                      .forgotPasswordForm.currentState!
+                                      .validate()) {
+                                    Get.offAll(Verification(),
+                                        binding: LoginBinding());
                                   }
                                 },
                               ),
@@ -140,10 +127,12 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                     text: 'Login',
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {
-                                        Get.toNamed(Routes.LOGIN);
+                                        Get.back();
                                       },
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Theme.of(context).primaryColor,
+                                    ),
                                   ),
                                 ],
                               ),

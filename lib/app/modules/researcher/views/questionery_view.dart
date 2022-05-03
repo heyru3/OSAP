@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:osap/app/modules/researcher/controllers/researcher_controller.dart';
+import 'package:osap/app/modules/researcher/controllers/questionery_controller.dart';
 import 'package:tap_canvas/tap_canvas.dart';
 
-class QuestioneryView extends GetView {
-  @override
-  final ResearcherController controller = Get.put(ResearcherController());
+class QuestioneryView extends GetView<QuestioneryController> {
   @override
   Widget build(BuildContext context) {
     if (controller.devHeight.value <

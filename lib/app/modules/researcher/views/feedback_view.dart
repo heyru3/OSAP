@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:osap/app/modules/researcher/controllers/researcher_controller.dart';
+import 'package:osap/app/modules/researcher/controllers/feedback_controller.dart';
 
 import '../../../data/widget/header.dart';
 
-class FeedbackView extends GetView {
-  @override
-  ResearcherController controller = Get.put(ResearcherController());
+class FeedbackView extends GetView<FeedbackController> {
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(

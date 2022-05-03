@@ -4,12 +4,18 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:osap/app/data/common/theme_helper.dart';
 import 'package:osap/app/data/widget/header.dart';
+import 'package:osap/app/modules/login/bindings/login_binding.dart';
+import 'package:osap/app/modules/login/views/forgot_password.dart';
+import 'package:osap/app/modules/researcher/bindings/researcher_binding.dart';
+import 'package:osap/app/modules/researcher/views/researcher_view.dart';
+import 'package:osap/app/modules/sign_up/bindings/sign_up_binding.dart';
+import 'package:osap/app/modules/sign_up/views/sign_up_view.dart';
 import 'package:osap/app/routes/app_pages.dart';
 
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
-  final double _headerHeight = 250;
+  final double _headerHeight = 150;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +24,7 @@ class LoginView extends GetView<LoginController> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        elevation:0,
+        elevation: 0,
         flexibleSpace: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -75,7 +81,7 @@ class LoginView extends GetView<LoginController> {
                           },
                           keyboardType: TextInputType.emailAddress,
                         ),
-                        SizedBox(height: 30 ),
+                        SizedBox(height: 30),
                         TextFormField(
                           controller: controller.passwordController,
                           obscureText: true,
@@ -97,8 +103,19 @@ class LoginView extends GetView<LoginController> {
                         Container(
                           margin: EdgeInsets.fromLTRB(10, 0, 10, 20),
                           alignment: Alignment.topRight,
-                          child: Text('Forgot your password?',
-                              style: TextStyle(fontFamily: 'openSans')),
+                          child: GestureDetector(
+                            onTap: () {
+                              Get.to(ForgotPassword(), binding: LoginBinding());
+                            },
+                            child: Text(
+                              'Forgot your password?',
+                              style: TextStyle(
+                                fontFamily: 'openSans',
+                                color: Theme.of(context).primaryColor,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
                         ),
                         Container(
                           decoration:
@@ -110,7 +127,8 @@ class LoginView extends GetView<LoginController> {
                                     .validate()) {
                                   controller.loginFormKey.currentState!.save();
                                   //Todo:implement Function to
-                                  Get.toNamed(Routes.RESEARCHER);
+                                  Get.to(ResearcherView(),
+                                      binding: ResearcherBinding());
                                 }
                               },
                               child: Padding(
@@ -143,7 +161,8 @@ class LoginView extends GetView<LoginController> {
                                   text: 'Create',
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {
-                                      Get.toNamed(Routes.SIGN_UP);
+                                      Get.to(SignUpView(),
+                                          binding: SignUpBinding());
                                     },
                                 )
                               ],

@@ -11,7 +11,6 @@ abstract class Routes {
   static const LOGIN = _Paths.LOGIN;
   static const SPLASH_SCREEN = _Paths.SPLASH_SCREEN;
 
-  static const FILTER = _Paths.FILTER;
   static const SIGN_UP = _Paths.SIGN_UP;
   static const RESEARCHER = _Paths.RESEARCHER;
 }
@@ -22,7 +21,7 @@ abstract class _Paths {
   static const LOGIN = '/login';
   static const SPLASH_SCREEN = '/splash-screen';
 
-  static const FILTER = '/filter';
+ 
   static const SIGN_UP = '/sign-up';
   static const RESEARCHER = '/researcher';
 }
