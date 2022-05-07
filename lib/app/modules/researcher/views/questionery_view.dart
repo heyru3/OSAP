@@ -71,15 +71,58 @@ class QuestioneryView extends GetView<QuestioneryController> {
                     controller: controller.bigDescriptionTextController,
                     cursorColor: Colors.grey,
                     decoration: InputDecoration(
-                        focusColor: Colors.grey,
-                        focusedBorder: InputBorder.none,
-                        border: InputBorder.none,
-                        hintText: 'Description of Survey',
-                        hintStyle: TextStyle(
-                            fontFamily: 'openSans',
-                            fontSize: 12,
-                            letterSpacing: 2,
-                            fontWeight: FontWeight.w600)),
+                      hintText: 'Description of Survey',
+                      hintStyle: TextStyle(
+                          fontFamily: 'openSans',
+                          fontSize: 12,
+                          letterSpacing: 2,
+                          fontWeight: FontWeight.w600),
+                      focusColor: Colors.grey,
+                      focusedBorder: InputBorder.none,
+                    ),
+                  ),
+                  TextField(
+                    controller: controller.budgetTextController,
+                    cursorColor: Colors.grey,
+                    decoration: InputDecoration(
+                      hintText: 'Amount of money to be paid',
+                      hintStyle: TextStyle(
+                          fontFamily: 'openSans',
+                          fontSize: 12,
+                          letterSpacing: 2,
+                          fontWeight: FontWeight.w600),
+                      focusColor: Colors.grey,
+                      focusedBorder: InputBorder.none,
+                    ),
+                  ),
+                  TextField(
+                    controller: controller.numberOfRespondentTextController,
+                    cursorColor: Colors.grey,
+                    decoration: InputDecoration(
+                      hintText: 'How many respondent do you want?',
+                      hintStyle: TextStyle(
+                          fontFamily: 'openSans',
+                          fontSize: 12,
+                          letterSpacing: 2,
+                          fontWeight: FontWeight.w600),
+                      focusColor: Colors.grey,
+                      focusedBorder: InputBorder.none,
+                    ),
+                  ),
+                  TextField(
+                    controller: controller.numberOfDayTextController,
+                    cursorColor: Colors.grey,
+                    decoration: InputDecoration(
+                      hintText: 'For how many day this survey is filled?',
+                      hintStyle: TextStyle(
+                          fontFamily: 'openSans',
+                          fontSize: 12,
+                          letterSpacing: 2,
+                          fontWeight: FontWeight.w600),
+                      border: InputBorder.none,
+                      focusColor: Colors.grey,
+                      focusedBorder: InputBorder.none,
+                    ),
                   ),
                 ]),
               ),
@@ -140,7 +183,7 @@ class QuestioneryView extends GetView<QuestioneryController> {
             Row(
               children: [
                 Expanded(
-                  flex: 5,
+                  flex: 10,
                   child: Container(
                     margin: EdgeInsets.only(left: 5),
                     height: 50,
@@ -172,27 +215,46 @@ class QuestioneryView extends GetView<QuestioneryController> {
                   ),
                 ),
                 Expanded(
-                    flex: 1,
-                    child: Obx(() => Visibility(
-                          visible: controller.bigBoxVisibility.value,
-                          child: IconButton(
-                              onPressed: () {},
-                              iconSize: 45,
-                              icon: Icon(Icons.image_outlined)),
-                        ))),
+                  flex: 1,
+                  child: SizedBox(),
+                ),
                 Expanded(
-                  flex: 2,
+                  flex: 4,
                   child: Obx(() => Visibility(
                         visible: controller.bigBoxVisibility.value,
                         child: Container(
                           margin: EdgeInsets.only(right: 5),
-                          color: Colors.green,
                           height: 50,
+                          child: GestureDetector(
+                            onTap: () {
+                              
+                            },
+                           
+                          ),
                         ),
                       )),
                 ),
               ],
             ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(5, 2, 5, 2),
+              child: TextField(
+                controller: controller.eachBoxDescriptionController,
+                cursorColor: Colors.grey,
+                decoration: InputDecoration(
+                  hintText: 'Description',
+                  hintStyle: TextStyle(
+                      fontFamily: 'openSans',
+                      fontSize: 12,
+                      letterSpacing: 2,
+                      fontWeight: FontWeight.w600),
+                  focusColor: Colors.grey,
+                  focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey)),
+                ),
+              ),
+            ),
+
             /*Column(
               children: [],
             ),

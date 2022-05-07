@@ -10,7 +10,7 @@ import 'package:osap/app/modules/researcher/bindings/researcher_binding.dart';
 import 'package:osap/app/modules/researcher/views/researcher_view.dart';
 import 'package:osap/app/modules/sign_up/bindings/sign_up_binding.dart';
 import 'package:osap/app/modules/sign_up/views/sign_up_view.dart';
-import 'package:osap/app/routes/app_pages.dart';
+
 
 import '../controllers/login_controller.dart';
 

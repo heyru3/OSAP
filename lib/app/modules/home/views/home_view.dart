@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:osap/app/modules/home/controllers/home_controller.dart';
 import 'package:osap/app/modules/login/bindings/login_binding.dart';
 import 'package:osap/app/modules/login/views/login_view.dart';
 import 'package:osap/app/modules/sign_up/bindings/sign_up_binding.dart';
@@ -9,14 +10,11 @@ import 'package:osap/app/modules/sign_up/views/sign_up_view.dart';
 
 import '../../../data/widget/header.dart';
 
-class HomeView extends GetView {
-  final double _headerHeight = 200;
-  late final double _devWidth;
-  late final double _devHeight;
+class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
-    _devHeight = MediaQuery.of(context).size.height;
-    _devWidth = MediaQuery.of(context).size.width;
+    controller.setDevWandH(context);
+
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
     return Scaffold(
@@ -38,8 +36,9 @@ class HomeView extends GetView {
         child: Column(
           children: [
             Container(
-              height: _headerHeight,
-              child: HeaderWidget(_headerHeight, true, Icons.login_rounded),
+              height: controller.headerHeight,
+              child: HeaderWidget(
+                  controller.headerHeight, true, Icons.login_rounded),
             ),
             SafeArea(
                 child: Container(
@@ -50,8 +49,8 @@ class HomeView extends GetView {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    height: _devHeight / 3,
-                    width: _devWidth * 2 / 3,
+                    height: controller.getDevHeight(context) / 3,
+                    width: controller.getDevWidth(context) * 2 / 3,
                     alignment: Alignment.topCenter,
                     child: Lottie.asset('assets/lottie/work_team.json'),
                   ),

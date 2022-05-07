@@ -5,8 +5,6 @@ import 'package:introduction_screen/introduction_screen.dart';
 import 'package:lottie/lottie.dart';
 import 'package:osap/app/routes/app_pages.dart';
 
-
-
 class IntroductionView extends GetView {
   @override
   Widget build(BuildContext context) {
@@ -24,7 +22,7 @@ class IntroductionView extends GetView {
                   fontFamily: 'openSans',
                 )),
             onDone: () {
-              Get.offAndToNamed(Routes.HOME);
+              Get.offAllNamed(Routes.HOME);
             },
             skip: Text('Skip',
                 style: TextStyle(
@@ -32,7 +30,7 @@ class IntroductionView extends GetView {
                 )),
             showSkipButton: true,
             onSkip: () {
-              Get.offAndToNamed(Routes.HOME);
+              Get.offAllNamed(Routes.HOME);
             },
             next: Text('Next',
                 style: TextStyle(

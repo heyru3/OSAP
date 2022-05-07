@@ -9,9 +9,14 @@ class ThemeHelper {
     return InputDecoration(
       labelText: labelText,
       hintText: hintText,
+      labelStyle: TextStyle(color: Colors.black45),
+      hintStyle: TextStyle(color: Colors.black45),
       fillColor: Colors.white,
       filled: true,
-      prefixIcon: Icon(iconData),
+      prefixIcon: Icon(
+        iconData,
+        color: Colors.black45,
+      ),
       contentPadding: EdgeInsets.fromLTRB(20, 10, 20, 10),
       focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(100.0),

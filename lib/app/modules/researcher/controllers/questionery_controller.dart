@@ -5,7 +5,11 @@ class QuestioneryController extends GetxController {
   GlobalKey<FormState> eachBoxKey = GlobalKey<FormState>();
   late TextEditingController bigTitleTextController;
   late TextEditingController bigDescriptionTextController;
+  late TextEditingController budgetTextController;
+  late TextEditingController numberOfRespondentTextController;
+  late TextEditingController numberOfDayTextController;
   late TextEditingController eachBoxTextController;
+  late TextEditingController eachBoxDescriptionController;
 
   RxInt questioneryAmount = 1.obs;
   RxDouble devHeight = 0.0.obs;
@@ -16,7 +20,10 @@ class QuestioneryController extends GetxController {
     bigTitleTextController = TextEditingController();
     bigDescriptionTextController = TextEditingController();
     eachBoxTextController = TextEditingController();
-
+    eachBoxDescriptionController = TextEditingController();
+    budgetTextController = TextEditingController();
+    numberOfRespondentTextController = TextEditingController();
+    numberOfDayTextController = TextEditingController();
     super.onInit();
   }
 
@@ -25,6 +32,10 @@ class QuestioneryController extends GetxController {
     bigTitleTextController.dispose();
     bigDescriptionTextController.dispose();
     eachBoxTextController.dispose();
+    eachBoxDescriptionController.dispose();
+    budgetTextController.dispose();
+    numberOfRespondentTextController.dispose();
+    numberOfDayTextController.dispose();
   }
 
   double containerHeight(BuildContext context) {
