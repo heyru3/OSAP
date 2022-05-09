@@ -7,7 +7,7 @@ import 'package:osap/app/modules/login/views/login_view.dart';
 import 'package:osap/app/modules/researcher/bindings/researcher_binding.dart';
 import 'package:osap/app/modules/researcher/views/researcher_view.dart';
 import 'package:osap/app/modules/sign_up/bindings/sign_up_binding.dart';
-import 'package:osap/app/modules/sign_up/views/sign_up_view.dart';
+import 'package:osap/app/modules/sign_up/views/researcher_sign_up_view.dart';
 import 'package:osap/app/modules/splash_screen/bindings/splash_screen_binding.dart';
 import 'package:osap/app/modules/splash_screen/views/splash_screen_view.dart';
 
@@ -40,7 +40,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.SIGN_UP,
-      page: () => SignUpView(),
+      page: () => ResearcherSignUpView(),
       binding: SignUpBinding(),
     ),
     GetPage(

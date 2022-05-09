@@ -6,11 +6,9 @@ import 'package:osap/app/data/common/theme_helper.dart';
 import 'package:osap/app/data/widget/header.dart';
 import 'package:osap/app/modules/login/bindings/login_binding.dart';
 import 'package:osap/app/modules/login/views/forgot_password.dart';
-import 'package:osap/app/modules/researcher/bindings/researcher_binding.dart';
-import 'package:osap/app/modules/researcher/views/researcher_view.dart';
+import 'package:osap/app/modules/login/views/splash_view.dart';
 import 'package:osap/app/modules/sign_up/bindings/sign_up_binding.dart';
-import 'package:osap/app/modules/sign_up/views/sign_up_view.dart';
-
+import 'package:osap/app/modules/sign_up/views/researcher_sign_up_view.dart';
 
 import '../controllers/login_controller.dart';
 
@@ -126,9 +124,44 @@ class LoginView extends GetView<LoginController> {
                                 if (controller.loginFormKey.currentState!
                                     .validate()) {
                                   controller.loginFormKey.currentState!.save();
-                                  //Todo:implement Function to
-                                  Get.to(ResearcherView(),
-                                      binding: ResearcherBinding());
+                                  controller
+                                      .login(
+                                    controller.passwordController.text,
+                                    controller.emailController.text,
+                                  )
+                                      .then((value) {
+                                    if (value) {
+                                      Get.to(SplashView(),
+                                          binding: LoginBinding());
+                                    } else {
+                                      Get.defaultDialog(
+                                        title: 'Error',
+                                        titleStyle: TextStyle(
+                                          fontSize: 16,
+                                          fontFamily: 'openSans',
+                                          letterSpacing: 2,
+                                          color: Color.fromARGB(255, 233, 101, 91),
+                                        ),
+                                        content: Column(
+                                          children: [
+                                            Divider(
+                                              thickness: 1.5,
+                                              color: Colors.grey,
+                                            ),
+                                            Text(
+                                              'Either password or email is incorrect',
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                fontFamily: 'openSans',
+                                                letterSpacing: 1.5,
+                                                color: Color.fromARGB(255, 243, 96, 85),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    }
+                                  });
                                 }
                               },
                               child: Padding(
@@ -161,7 +194,7 @@ class LoginView extends GetView<LoginController> {
                                   text: 'Create',
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {
-                                      Get.to(SignUpView(),
+                                      Get.to(ResearcherSignUpView(),
                                           binding: SignUpBinding());
                                     },
                                 )

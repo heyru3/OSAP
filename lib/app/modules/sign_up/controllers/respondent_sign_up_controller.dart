@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-class SignUpController extends GetxController {
+class RespondentSignUpController extends GetxController {
   final formKey = GlobalKey<FormState>();
   RxBool checkedValue = false.obs;
   RxBool checkboxValue = false.obs;
@@ -9,14 +9,14 @@ class SignUpController extends GetxController {
   var firstName = '';
   var lastName = '';
   var email = '';
-  var phone = '';
+  var username = '';
   var password = '';
 
   late TextEditingController firstNameController;
   late TextEditingController lastNameController;
   late TextEditingController emailNameController;
   late TextEditingController passwordNameController;
-  late TextEditingController phoneNameController;
+  late TextEditingController usernameController;
 
   @override
   void onInit() {
@@ -24,7 +24,7 @@ class SignUpController extends GetxController {
     lastNameController = TextEditingController();
     emailNameController = TextEditingController();
     passwordNameController = TextEditingController();
-    phoneNameController = TextEditingController();
+    usernameController = TextEditingController();
     super.onInit();
   }
 
@@ -34,7 +34,7 @@ class SignUpController extends GetxController {
     lastNameController.dispose();
     emailNameController.dispose();
     passwordNameController.dispose();
-    phoneNameController.dispose();
+    usernameController.dispose();
     super.onClose();
   }
 
@@ -52,9 +52,9 @@ class SignUpController extends GetxController {
     return null;
   }
 
-  String? validatePhone(String value) {
-    if (!value.isPhoneNumber) {
-      return "Enter a valid phone number";
+  String? validateName(String value,String type) {
+    if (value.isEmpty || value.isNumericOnly) {
+      return "Enter a valid $type";
     }
     return null;
   }

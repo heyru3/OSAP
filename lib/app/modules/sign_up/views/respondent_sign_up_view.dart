@@ -2,13 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:lottie/lottie.dart';
 import 'package:osap/app/data/widget/header.dart';
+import 'package:osap/app/modules/home/bindings/home_binding.dart';
 import 'package:osap/app/routes/app_pages.dart';
 
 import '../../../data/common/theme_helper.dart';
-import '../controllers/sign_up_controller.dart';
+import '../../home/views/home_view.dart';
+import '../bindings/sign_up_binding.dart';
+import '../controllers/respondent_sign_up_controller.dart';
+import 'researcher_sign_up_view.dart';
 
-class SignUpView extends GetView<SignUpController> {
+class RespondentSignUpView extends GetView<RespondentSignUpController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,6 +88,43 @@ class SignUpView extends GetView<SignUpController> {
                             ],
                           ),
                         ),
+                        GestureDetector(
+                          onTap: () {
+                            Get.offAll(ResearcherSignUpView(),
+                                binding: SignUpBinding());
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(children: [
+                                Lottie.asset('assets/lottie/fast-forward.json',
+                                    width: 5, height: 80, fit: BoxFit.cover),
+                                SizedBox(
+                                  width: 60,
+                                ),
+                                Text(
+                                  'To sign up as respondent',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black54,
+                                    fontFamily: 'openSans',
+                                  ),
+                                )
+                              ]),
+                               TextButton(
+                                  onPressed: () {
+                                    Get.offAll(HomeView(),binding: HomeBinding());
+                                  },
+                                  child: Icon(
+                                    FontAwesomeIcons.houseChimneyUser,
+                                    size: 24,
+                                    color: Theme.of(context).primaryColor,
+                                  ))
+                            ],
+                          ),
+                        ),
+                        
                         SizedBox(height: 30),
                         Container(
                           child: TextFormField(
@@ -93,6 +135,10 @@ class SignUpView extends GetView<SignUpController> {
                                 iconData: FontAwesomeIcons.user),
                             onSaved: (value) {
                               controller.firstName = value!;
+                            },
+                            validator: (value) {
+                              return controller.validateName(
+                                  value!, 'first name');
                             },
                           ),
                           decoration: ThemeHelper().inputBoxDecorationShadow(),
@@ -108,6 +154,10 @@ class SignUpView extends GetView<SignUpController> {
                             ),
                             onSaved: (value) {
                               controller.lastName = value!;
+                            },
+                            validator: (value) {
+                              return controller.validateName(
+                                  value!, 'last name');
                             },
                           ),
                           decoration: ThemeHelper().inputBoxDecorationShadow(),
@@ -133,18 +183,19 @@ class SignUpView extends GetView<SignUpController> {
                         SizedBox(height: 20.0),
                         Container(
                           child: TextFormField(
-                            controller: controller.phoneNameController,
+                            controller: controller.usernameController,
                             decoration: ThemeHelper().textInputDecoration(
-                              labelText: 'Mobile Number',
-                              hintText: 'Enter your mobile number',
-                              iconData: Icons.phone_outlined,
+                              labelText: 'Username',
+                              hintText: 'Enter your username',
+                              iconData: FontAwesomeIcons.user,
                             ),
                             onSaved: (value) {
-                              controller.phone = value!;
+                              controller.username = value!;
                             },
                             keyboardType: TextInputType.phone,
                             validator: (value) {
-                              return controller.validatePhone(value!);
+                              return controller.validateName(
+                                  value!, 'username');
                             },
                           ),
                           decoration: ThemeHelper().inputBoxDecorationShadow(),
@@ -220,7 +271,7 @@ class SignUpView extends GetView<SignUpController> {
                               padding:
                                   const EdgeInsets.fromLTRB(40, 10, 40, 10),
                               child: Text(
-                                "Register".toUpperCase(),
+                                'Sign In',
                                 style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,

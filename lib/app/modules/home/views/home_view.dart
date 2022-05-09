@@ -6,7 +6,7 @@ import 'package:osap/app/modules/home/controllers/home_controller.dart';
 import 'package:osap/app/modules/login/bindings/login_binding.dart';
 import 'package:osap/app/modules/login/views/login_view.dart';
 import 'package:osap/app/modules/sign_up/bindings/sign_up_binding.dart';
-import 'package:osap/app/modules/sign_up/views/sign_up_view.dart';
+import 'package:osap/app/modules/sign_up/views/researcher_sign_up_view.dart';
 
 import '../../../data/widget/header.dart';
 
@@ -153,7 +153,8 @@ class HomeView extends GetView<HomeController> {
                       SizedBox(width: 5),
                       GestureDetector(
                         onTap: () {
-                          Get.to(SignUpView(), binding: SignUpBinding());
+                          Get.to(ResearcherSignUpView(),
+                              binding: SignUpBinding());
                         },
                         child: Container(
                           decoration: BoxDecoration(
