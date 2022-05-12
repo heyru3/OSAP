@@ -5,6 +5,9 @@ import 'package:introduction_screen/introduction_screen.dart';
 import 'package:lottie/lottie.dart';
 import 'package:osap/app/routes/app_pages.dart';
 
+import '../../sign_up/bindings/sign_up_binding.dart';
+import '../../sign_up/views/respondent_sign_up_view.dart';
+
 class IntroductionView extends GetView {
   @override
   Widget build(BuildContext context) {
@@ -30,7 +33,7 @@ class IntroductionView extends GetView {
                 )),
             showSkipButton: true,
             onSkip: () {
-              Get.offAllNamed(Routes.HOME);
+              Get.offAll(RespondentSignUpView(), binding: SignUpBinding());
             },
             next: Text('Next',
                 style: TextStyle(

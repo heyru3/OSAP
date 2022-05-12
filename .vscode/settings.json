@@ -1,3 +1,5 @@
 {
-  "editor.fontFamily": "Consolas, 'Courier New', monospace,Red Hat Mono,MesloLGM NF"
+  "editor.fontFamily": "Consolas, 'Courier New', monospace,Red Hat Mono,MesloLGM NF",
+  "dart.previewFlutterUiGuides": true,
+  "dart.previewFlutterUiGuidesCustomTracking": true
 }

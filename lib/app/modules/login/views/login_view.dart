@@ -131,7 +131,7 @@ class LoginView extends GetView<LoginController> {
                                   )
                                       .then((value) {
                                     if (value) {
-                                      Get.to(SplashView(),
+                                      Get.offAll(SplashView(),
                                           binding: LoginBinding());
                                     } else {
                                       Get.defaultDialog(
@@ -140,7 +140,8 @@ class LoginView extends GetView<LoginController> {
                                           fontSize: 16,
                                           fontFamily: 'openSans',
                                           letterSpacing: 2,
-                                          color: Color.fromARGB(255, 233, 101, 91),
+                                          color:
+                                              Color.fromARGB(255, 233, 101, 91),
                                         ),
                                         content: Column(
                                           children: [
@@ -154,7 +155,8 @@ class LoginView extends GetView<LoginController> {
                                                 fontSize: 16,
                                                 fontFamily: 'openSans',
                                                 letterSpacing: 1.5,
-                                                color: Color.fromARGB(255, 243, 96, 85),
+                                                color: Color.fromARGB(
+                                                    255, 243, 96, 85),
                                               ),
                                             ),
                                           ],
