@@ -7,8 +7,10 @@ import '../../../data/widget/header.dart';
 import 'package:osap/app/modules/home/bindings/home_binding.dart';
 
 import '../../../data/common/theme_helper.dart';
-import '../../../routes/app_pages.dart';
+
 import '../../home/views/home_view.dart';
+import '../../login/bindings/login_binding.dart';
+import '../../login/views/login_view.dart';
 import '../bindings/sign_up_binding.dart';
 import '../controllers/respondent_sign_up_controller.dart';
 import 'researcher_sign_up_view.dart';
@@ -16,7 +18,6 @@ import 'researcher_sign_up_view.dart';
 class RespondentSignUpView extends GetView<RespondentSignUpController> {
   @override
   Widget build(BuildContext context) {
-    print('from build');
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -205,7 +206,6 @@ class RespondentSignUpView extends GetView<RespondentSignUpController> {
                         Container(
                           child: TextFormField(
                             controller: controller.cityController,
-                            obscureText: true,
                             decoration: ThemeHelper().textInputDecoration(
                               labelText: 'city',
                               hintText: 'Enter your city',
@@ -240,14 +240,13 @@ class RespondentSignUpView extends GetView<RespondentSignUpController> {
                         Container(
                           child: TextFormField(
                             controller: controller.phoneController,
-                            obscureText: true,
                             decoration: ThemeHelper().textInputDecoration(
                               labelText: 'phone',
                               hintText: 'Enter your phone number',
                               iconData: Icons.phone_outlined,
                             ),
                             onSaved: (value) {
-                              controller.city = value!;
+                              controller.phone = value.toString();
                             },
                             validator: (value) {
                               return controller.validatePhone(value!);
@@ -402,8 +401,8 @@ class RespondentSignUpView extends GetView<RespondentSignUpController> {
                                             child: Text('Gambela'),
                                             value: 'Gambela'),
                                         DropdownMenuItem(
-                                            child: Text('Somalia'),
-                                            value: 'Somalia'),
+                                            child: Text('Somali'),
+                                            value: 'Somali'),
                                         DropdownMenuItem(
                                             child: Text('Sidama'),
                                             value: 'Sidama'),
@@ -486,8 +485,9 @@ class RespondentSignUpView extends GetView<RespondentSignUpController> {
                                 ],
                               ),
                               GestureDetector(
-                                onTap: () {
-                                  controller.chooseDateRangePicer();
+                                onTap: () async {
+                                  controller.birthDate.value =
+                                      await controller.chooseDateRangePicer();
                                   print(controller.birthDate.value);
                                 },
                                 child: Icon(
@@ -542,25 +542,23 @@ class RespondentSignUpView extends GetView<RespondentSignUpController> {
                                     ],
                                   ),
                                   Obx(
-                                    () => DropdownButton(
-                                      value:
-                                          controller.education.value,
+                                    () => DropdownButton<int>(
+                                      value: controller.education.value,
                                       items: [
                                         DropdownMenuItem(
-                                            child: Text('None'), value: 'None'),
+                                            child: Text('None'), value: 0),
                                         DropdownMenuItem(
-                                            child: Text('BSC'), value: 'BSC'),
+                                            child: Text('BSC'), value: 1),
                                         DropdownMenuItem(
-                                            child: Text('MSC'), value: 'MSC'),
+                                            child: Text('MSC'), value: 2),
                                         DropdownMenuItem(
-                                            child: Text('PHD'), value: 'PHD'),
+                                            child: Text('PHD'), value: 3),
                                         DropdownMenuItem(
-                                            child: Text('Professer'),
-                                            value: 'Professer'),
+                                            child: Text('Professer'), value: 4),
                                       ],
                                       onChanged: (value) {
                                         controller.education.value =
-                                            value.toString();
+                                            value!;
                                       },
                                       style: TextStyle(
                                         fontFamily: 'openSans',
@@ -572,7 +570,8 @@ class RespondentSignUpView extends GetView<RespondentSignUpController> {
                                         color: Colors.grey,
                                       ),
                                       borderRadius: BorderRadius.circular(12),
-                                      alignment: AlignmentDirectional.centerStart,
+                                      alignment:
+                                          AlignmentDirectional.centerStart,
                                     ),
                                   ),
                                 ])),
@@ -620,28 +619,25 @@ class RespondentSignUpView extends GetView<RespondentSignUpController> {
                                     ],
                                   ),
                                   Obx(
-                                    () => DropdownButton(
-                                      value:
-                                          controller.occupation.value,
+                                    () => DropdownButton<int>(
+                                      value: controller.occupation.value,
                                       items: [
                                         DropdownMenuItem(
-                                            child: Text('None'), value: 'None'),
+                                            child: Text('None'), value: 0),
                                         DropdownMenuItem(
-                                            child: Text('Teacher'), value: 'Teacher'),
+                                            child: Text('Teacher'), value: 1),
                                         DropdownMenuItem(
-                                            child: Text('Student'), value: 'Student'),
+                                            child: Text('Student'), value: 2),
                                         DropdownMenuItem(
-                                            child: Text('Carpenter'), value: 'Carpenter'),
+                                            child: Text('Carpenter'), value: 3),
                                         DropdownMenuItem(
-                                            child: Text('Marchant'),
-                                            value: 'Marchant'),
-                                            DropdownMenuItem(
-                                            child: Text('Other'),
-                                            value: 'Other'),
+                                            child: Text('Marchant'), value: 4),
+                                        DropdownMenuItem(
+                                            child: Text('Other'), value: 5),
                                       ],
                                       onChanged: (value) {
                                         controller.occupation.value =
-                                            value.toString();
+                                            value!;
                                       },
                                       style: TextStyle(
                                         fontFamily: 'openSans',
@@ -653,13 +649,12 @@ class RespondentSignUpView extends GetView<RespondentSignUpController> {
                                         color: Colors.grey,
                                       ),
                                       borderRadius: BorderRadius.circular(12),
-                                      alignment: AlignmentDirectional.centerStart,
+                                      alignment:
+                                          AlignmentDirectional.centerStart,
                                     ),
                                   ),
                                 ])),
                         SizedBox(height: 15.0),
-                       
-                       
                         FormField<bool>(
                           builder: (state) {
                             return Column(
@@ -722,9 +717,70 @@ class RespondentSignUpView extends GetView<RespondentSignUpController> {
                             onPressed: () {
                               if (controller.formKey.currentState!.validate()) {
                                 controller.formKey.currentState!.save();
-
-                                //Todo:implement Function to
-                                Get.toNamed(Routes.RESEARCHER);
+                                print(
+                                   controller.usernameController.text+
+                                  controller.firstNameController.text+
+                                  controller.lastNameController.text+
+                                  controller.gender.value+
+                                  controller.emailNameController.text+
+                                  controller.birthDate.value.toString()+
+                                  controller.region.value+
+                                  controller.cityController.text+
+                                  controller.phoneController.text+
+                                  controller.education.value.toString()+
+                                  controller.occupation.value.toString()+
+                                  controller.passwordNameController.text
+                                );
+                                controller
+                                    .signUp(
+                                  controller.usernameController.text,
+                                  controller.firstNameController.text,
+                                  controller.lastNameController.text,
+                                  controller.gender.value,
+                                  controller.emailNameController.text,
+                                  controller.dateFormat.format(controller.birthDate.value),
+                                  controller.region.value,
+                                  controller.cityController.text,
+                                  controller.phoneController.text,
+                                  controller.education.value,
+                                  controller.occupation.value,
+                                  controller.passwordNameController.text,
+                                )
+                                    .then((value) {
+                                  if (value) {
+                                    Get.to(LoginView(),
+                                        binding: LoginBinding());
+                                  } else {
+                                    Get.defaultDialog(
+                                      title: 'Error',
+                                      titleStyle: TextStyle(
+                                        fontSize: 16,
+                                        fontFamily: 'openSans',
+                                        letterSpacing: 2,
+                                        color:
+                                            Color.fromARGB(255, 233, 101, 91),
+                                      ),
+                                      content: Column(
+                                        children: [
+                                          Divider(
+                                            thickness: 1.5,
+                                            color: Colors.grey,
+                                          ),
+                                          Text(
+                                            'Either password or email is incorrect',
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontFamily: 'openSans',
+                                              letterSpacing: 1.5,
+                                              color: Color.fromARGB(
+                                                  255, 243, 96, 85),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  }
+                                });
                               }
                             },
                           ),

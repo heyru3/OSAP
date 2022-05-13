@@ -6,10 +6,13 @@ import 'package:osap/app/data/common/theme_helper.dart';
 import 'package:osap/app/data/widget/header.dart';
 import 'package:osap/app/modules/login/bindings/login_binding.dart';
 import 'package:osap/app/modules/login/views/forgot_password.dart';
-import 'package:osap/app/modules/login/views/splash_view.dart';
+import 'package:osap/app/modules/researcher/bindings/researcher_binding.dart';
+import 'package:osap/app/modules/researcher/views/researcher_view.dart';
 import 'package:osap/app/modules/sign_up/bindings/sign_up_binding.dart';
 import 'package:osap/app/modules/sign_up/views/researcher_sign_up_view.dart';
+import 'package:osap/app/modules/splash_screen/bindings/splash_screen_binding.dart';
 
+import '../../splash_screen/views/splash_screen_view.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
@@ -129,10 +132,25 @@ class LoginView extends GetView<LoginController> {
                                     controller.passwordController.text,
                                     controller.emailController.text,
                                   )
-                                      .then((value) {
+                                      .then((value) async {
                                     if (value) {
-                                      Get.offAll(SplashView(),
-                                          binding: LoginBinding());
+                                      controller
+                                          .userInformation(controller.userToke.value)
+                                          .then((value2) {
+                                        if (value2['roll'] == 'Researcher') {
+                                          Get.offAll(
+                                            ResearcherView(),
+                                            binding: ResearcherBinding(),
+                                            arguments: controller.userToke.value,
+                                          );
+                                        } else {
+                                          Get.offAll(
+                                            SplashScreenView(),
+                                            binding: SplashScreenBinding(),
+                                            arguments: controller.userToke,
+                                          );
+                                        }
+                                      });
                                     } else {
                                       Get.defaultDialog(
                                         title: 'Error',

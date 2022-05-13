@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:osap/app/modules/login/providers/login_provider.dart';
 
+import '../providers/user_information_provider.dart';
+
 class LoginController extends GetxController {
   GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
   late TextEditingController emailController, passwordController;
@@ -41,10 +43,19 @@ class LoginController extends GetxController {
 
   login(String password, String email) async {
     dynamic response = await LoginProvider().login(password, email);
+    
     if (response['auth_token'] == 'error') {
       return false;
     } else {
+      userToke.value = response['auth_token'];
       return true;
     }
+  }
+
+  userInformation(token) async {
+    dynamic response =
+        await UserInformationProvider().feachUserInformation(token);
+    
+    return response;
   }
 }

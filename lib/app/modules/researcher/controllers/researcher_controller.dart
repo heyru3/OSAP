@@ -1,7 +1,11 @@
-
 import 'package:get/get.dart';
 
-class ResearcherController extends GetxController {
-  
+import '../providers/logout_provider.dart';
 
+class ResearcherController extends GetxController {
+  var token = ''.obs;
+  logout() async {
+    bool response = await LogoutProvider().feachLogout(token);
+    return response;
+  }
 }

@@ -16,6 +16,7 @@ dependencies:
   tap_canvas: ^0.9.4
   date_ranger: 0.0.1
   menu_button: 1.4.2+1
+  intl: 0.17.0
   flutter: 
     sdk: flutter
 

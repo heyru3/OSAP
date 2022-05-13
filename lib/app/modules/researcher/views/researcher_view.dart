@@ -16,6 +16,7 @@ class ResearcherView extends GetView<ResearcherController> {
 
   @override
   Widget build(BuildContext context) {
+    controller.token.value = Get.arguments;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -215,6 +216,7 @@ class ResearcherView extends GetView<ResearcherController> {
                       color: Theme.of(context).colorScheme.secondary),
                 ),
                 onTap: () {
+                  controller.logout();
                   Get.offAllNamed(Routes.HOME);
                 },
               ),

@@ -7,6 +7,7 @@ import '../controllers/researcher_controller.dart';
 class ProfileView extends GetView<ResearcherController> {
   @override
   Widget build(BuildContext context) {
+   
     return Scaffold(
       appBar: AppBar(
         elevation: 0,

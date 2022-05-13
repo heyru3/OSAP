@@ -10,6 +10,7 @@ import '../controllers/researcher_controller.dart';
 class ResearcherBinding extends Bindings {
   @override
   void dependencies() {
+   
     Get.lazyPut<ResultController>(
       () => ResultController(),
     );

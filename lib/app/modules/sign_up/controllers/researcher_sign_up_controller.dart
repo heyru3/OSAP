@@ -63,7 +63,9 @@ class ResearcherSignUpController extends GetxController {
   }
 
   signUp(String firstName,String lastName,String username,String email,String password) async {
-    dynamic response = await ResearcherSignUpProvider().researcherSignup(firstName,lastName,username,email,password);
+    dynamic response = 
+    await ResearcherSignUpProvider().researcherSignup(
+      firstName,lastName,username,email,password);
     
     return response;
   }
