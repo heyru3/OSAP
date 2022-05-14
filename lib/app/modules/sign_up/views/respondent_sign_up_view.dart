@@ -239,6 +239,25 @@ class RespondentSignUpView extends GetView<RespondentSignUpController> {
                         SizedBox(height: 20.0),
                         Container(
                           child: TextFormField(
+                            controller: controller.conpasswordNameController,
+                            obscureText: true,
+                            decoration: ThemeHelper().textInputDecoration(
+                              labelText: 'confirmation Password',
+                              hintText: 'RE-enter your password',
+                              iconData: Icons.lock_outlined,
+                            ),
+                            onSaved: (value) {
+                              controller.conpassword = value!;
+                            },
+                            validator: (value) {
+                              return controller.validateRePassword(value!);
+                            },
+                          ),
+                          decoration: ThemeHelper().inputBoxDecorationShadow(),
+                        ),
+                        SizedBox(height: 20.0),
+                        Container(
+                          child: TextFormField(
                             controller: controller.phoneController,
                             decoration: ThemeHelper().textInputDecoration(
                               labelText: 'phone',
@@ -386,41 +405,53 @@ class RespondentSignUpView extends GetView<RespondentSignUpController> {
                                         DropdownMenuItem(
                                             child: Text('Afar'), value: 'Afar'),
                                         DropdownMenuItem(
-                                            child: Text('Oromia'),
-                                            value: 'Oromia'),
-                                        DropdownMenuItem(
-                                            child: Text('Dire Dawa'),
-                                            value: 'Dire Dawa'),
-                                        DropdownMenuItem(
-                                            child: Text('Tigray'),
-                                            value: 'Tigray'),
-                                        DropdownMenuItem(
                                             child: Text('Amhara'),
                                             value: 'Amhara'),
+                                        DropdownMenuItem(
+                                            child: Text('Benishangul-Gumuz'),
+                                            value: 'Benishangul-Gumuz'),
                                         DropdownMenuItem(
                                             child: Text('Gambela'),
                                             value: 'Gambela'),
                                         DropdownMenuItem(
-                                            child: Text('Somali'),
-                                            value: 'Somali'),
+                                            child: Text('Dire Dawa'),
+                                            value: 'Dire Dawa'),
                                         DropdownMenuItem(
-                                            child: Text('Sidama'),
-                                            value: 'Sidama'),
+                                            child: Text('Gambela'),
+                                            value: 'Gambela'),
+                                        DropdownMenuItem(
+                                            child: Text('Harari'),
+                                            value: 'Harari'),
+                                        DropdownMenuItem(
+                                            child: Text('Oromia'),
+                                            value: 'Oromia'),
+                                        DropdownMenuItem(
+                                            child: Text('Oromia'),
+                                            value: 'Oromia'),
                                         DropdownMenuItem(
                                             child: Text('Harari'),
                                             value: 'Harari'),
                                         DropdownMenuItem(
                                           child: Text(
-                                            'SWEP',
+                                            'Sidama',
                                           ),
-                                          value: 'South West Ethiopia Peoples',
+                                          value: 'Sidama',
                                         ),
+                                        DropdownMenuItem(
+                                            child: Text(
+                                              'Somali',
+                                            ),
+                                            value: ''),
                                         DropdownMenuItem(
                                             child: Text(
                                               'SNNP',
                                             ),
-                                            value:
-                                                'Southern Nations, Nationalities, and Peoples'),
+                                            value: 'SNNP'),
+                                        DropdownMenuItem(
+                                            child: Text(
+                                              'SWEP',
+                                            ),
+                                            value: 'SWEP'),
                                       ],
                                       onChanged: (value) {
                                         controller.region.value =
@@ -557,8 +588,7 @@ class RespondentSignUpView extends GetView<RespondentSignUpController> {
                                             child: Text('Professer'), value: 4),
                                       ],
                                       onChanged: (value) {
-                                        controller.education.value =
-                                            value!;
+                                        controller.education.value = value!;
                                       },
                                       style: TextStyle(
                                         fontFamily: 'openSans',
@@ -636,8 +666,7 @@ class RespondentSignUpView extends GetView<RespondentSignUpController> {
                                             child: Text('Other'), value: 5),
                                       ],
                                       onChanged: (value) {
-                                        controller.occupation.value =
-                                            value!;
+                                        controller.occupation.value = value!;
                                       },
                                       style: TextStyle(
                                         fontFamily: 'openSans',
@@ -706,7 +735,7 @@ class RespondentSignUpView extends GetView<RespondentSignUpController> {
                               padding:
                                   const EdgeInsets.fromLTRB(40, 10, 40, 10),
                               child: Text(
-                                'Sign In',
+                                'Sign UP',
                                 style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
@@ -717,20 +746,18 @@ class RespondentSignUpView extends GetView<RespondentSignUpController> {
                             onPressed: () {
                               if (controller.formKey.currentState!.validate()) {
                                 controller.formKey.currentState!.save();
-                                print(
-                                   controller.usernameController.text+
-                                  controller.firstNameController.text+
-                                  controller.lastNameController.text+
-                                  controller.gender.value+
-                                  controller.emailNameController.text+
-                                  controller.birthDate.value.toString()+
-                                  controller.region.value+
-                                  controller.cityController.text+
-                                  controller.phoneController.text+
-                                  controller.education.value.toString()+
-                                  controller.occupation.value.toString()+
-                                  controller.passwordNameController.text
-                                );
+                                print(controller.usernameController.text +
+                                    controller.firstNameController.text +
+                                    controller.lastNameController.text +
+                                    controller.gender.value +
+                                    controller.emailNameController.text +
+                                    controller.birthDate.value.toString() +
+                                    controller.region.value +
+                                    controller.cityController.text +
+                                    controller.phoneController.text +
+                                    controller.education.value.toString() +
+                                    controller.occupation.value.toString() +
+                                    controller.passwordNameController.text);
                                 controller
                                     .signUp(
                                   controller.usernameController.text,
@@ -738,7 +765,8 @@ class RespondentSignUpView extends GetView<RespondentSignUpController> {
                                   controller.lastNameController.text,
                                   controller.gender.value,
                                   controller.emailNameController.text,
-                                  controller.dateFormat.format(controller.birthDate.value),
+                                  controller.dateFormat
+                                      .format(controller.birthDate.value),
                                   controller.region.value,
                                   controller.cityController.text,
                                   controller.phoneController.text,

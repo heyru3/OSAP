@@ -3,10 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:lottie/lottie.dart';
+import 'package:osap/app/modules/home/bindings/home_binding.dart';
+import 'package:osap/app/modules/home/views/home_view.dart';
 import 'package:osap/app/modules/login/bindings/login_binding.dart';
 import 'package:osap/app/modules/login/views/login_view.dart';
 import 'package:osap/app/routes/app_pages.dart';
-
 
 class IntroductionView extends GetView {
   @override
@@ -33,7 +34,7 @@ class IntroductionView extends GetView {
                 )),
             showSkipButton: true,
             onSkip: () {
-              Get.offAll(LoginView(), binding: LoginBinding());
+              Get.offAll(HomeView(), binding: HomeBinding());
             },
             next: Text('Next',
                 style: TextStyle(

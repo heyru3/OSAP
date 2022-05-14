@@ -115,7 +115,8 @@ class ResearcherSignUpView extends GetView<ResearcherSignUpController> {
                               ]),
                               TextButton(
                                   onPressed: () {
-                                    Get.offAll(HomeView(),binding: HomeBinding());
+                                    Get.offAll(HomeView(),
+                                        binding: HomeBinding());
                                   },
                                   child: Icon(
                                     FontAwesomeIcons.houseChimneyUser,
@@ -270,7 +271,7 @@ class ResearcherSignUpView extends GetView<ResearcherSignUpController> {
                               padding:
                                   const EdgeInsets.fromLTRB(40, 10, 40, 10),
                               child: Text(
-                                'Sign In',
+                                'Sign Up',
                                 style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,

@@ -8,6 +8,8 @@ import 'package:osap/app/modules/login/bindings/login_binding.dart';
 import 'package:osap/app/modules/login/views/forgot_password.dart';
 import 'package:osap/app/modules/researcher/bindings/researcher_binding.dart';
 import 'package:osap/app/modules/researcher/views/researcher_view.dart';
+import 'package:osap/app/modules/respondent/bindings/respondent_binding.dart';
+import 'package:osap/app/modules/respondent/views/respondent_view.dart';
 import 'package:osap/app/modules/sign_up/bindings/sign_up_binding.dart';
 import 'package:osap/app/modules/sign_up/views/researcher_sign_up_view.dart';
 import 'package:osap/app/modules/splash_screen/bindings/splash_screen_binding.dart';
@@ -135,19 +137,22 @@ class LoginView extends GetView<LoginController> {
                                       .then((value) async {
                                     if (value) {
                                       controller
-                                          .userInformation(controller.userToke.value)
+                                          .userInformation(
+                                              controller.userToke.value)
                                           .then((value2) {
                                         if (value2['roll'] == 'Researcher') {
                                           Get.offAll(
                                             ResearcherView(),
                                             binding: ResearcherBinding(),
-                                            arguments: controller.userToke.value,
+                                            arguments:
+                                                controller.userToke.value,
                                           );
                                         } else {
                                           Get.offAll(
-                                            SplashScreenView(),
-                                            binding: SplashScreenBinding(),
-                                            arguments: controller.userToke,
+                                            RespondentView(),
+                                            binding: RespondentBinding(),
+                                            arguments:
+                                                controller.userToke.value,
                                           );
                                         }
                                       });

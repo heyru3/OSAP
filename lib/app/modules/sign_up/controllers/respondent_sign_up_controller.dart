@@ -24,6 +24,7 @@ class RespondentSignUpController extends GetxController {
   var email = '';
   var username = '';
   var password = '';
+  var conpassword = '';
   var city = '';
   var phone = '';
 
@@ -31,6 +32,7 @@ class RespondentSignUpController extends GetxController {
   late TextEditingController lastNameController;
   late TextEditingController emailNameController;
   late TextEditingController passwordNameController;
+  late TextEditingController conpasswordNameController;
   late TextEditingController usernameController;
   late TextEditingController cityController;
   late TextEditingController phoneController;
@@ -41,6 +43,8 @@ class RespondentSignUpController extends GetxController {
     lastNameController = TextEditingController();
     emailNameController = TextEditingController();
     passwordNameController = TextEditingController();
+    conpasswordNameController = TextEditingController();
+
     usernameController = TextEditingController();
     cityController = TextEditingController();
     phoneController = TextEditingController();
@@ -54,6 +58,8 @@ class RespondentSignUpController extends GetxController {
     lastNameController.dispose();
     emailNameController.dispose();
     passwordNameController.dispose();
+    conpasswordNameController.dispose();
+
     usernameController.dispose();
     cityController.dispose();
     phoneController.dispose();
@@ -74,7 +80,12 @@ class RespondentSignUpController extends GetxController {
     }
     return null;
   }
-
+String? validateRePassword(String value) {
+    if (value == passwordNameController.text) {
+      return null;
+    }
+    return 'password not much';
+  }
   String? validateName(String value, String type) {
     if (value.isEmpty || value.isNumericOnly) {
       return "Enter a valid $type";
