@@ -8,4 +8,5 @@ class ResearcherController extends GetxController {
     bool response = await LogoutProvider().feachLogout(token);
     return response;
   }
+  
 }

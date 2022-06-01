@@ -1,12 +1,18 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:osap/app/data/widget/header.dart';
+import 'package:osap/app/modules/respondent/bindings/respondent_binding.dart';
 import 'package:osap/app/modules/respondent/controllers/reshome_controller.dart';
+import 'package:osap/app/modules/respondent/views/detail_display_question_view.dart';
 
-class ReshomeView extends GetView {
+class ReshomeView extends GetView<ReshomeController> {
   @override
   Widget build(BuildContext context) {
+    /// controller.token.value = Get.arguments;
+
+    // controller.onInit;
     return Scaffold(
 /////////////////////////////////
       ///import 'package:flutter/material.dart';
@@ -14,7 +20,7 @@ class ReshomeView extends GetView {
         child: Column(
           children: [
             Container(
-              height: 150,
+              height: 100,
               child: HeaderWidget(150, false, Icons.house_rounded),
             ),
             SafeArea(
@@ -26,7 +32,7 @@ class ReshomeView extends GetView {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'With OSAP you can:',
+                      'Surveys:',
                       style: TextStyle(
                         color: Colors.blue,
                         letterSpacing: 1.2,
@@ -34,105 +40,129 @@ class ReshomeView extends GetView {
                         fontFamily: 'openSans',
                       ),
                     ),
+                    Container(
+                      height: MediaQuery.of(context).size.height,
+                      child: FutureBuilder(
+                        future: controller.getSurvey(Get.arguments),
+                        builder: (context, AsyncSnapshot snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Center(child: CircularProgressIndicator());
+                          } else if (snapshot.connectionState ==
+                              ConnectionState.done) {
+                            return ListView.builder(
+                                itemCount: snapshot.data.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Container(
+                                    padding: EdgeInsets.all(8),
+                                    margin: EdgeInsets.only(left: 10, top: 10),
+                                    width: MediaQuery.of(context).size.width *
+                                        2 /
+                                        3,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white54,
+                                        border: Border(
+                                            left: BorderSide(
+                                                width: 2, color: Colors.blue))),
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          child: Text(
+                                            "Title:"
+                                            '${snapshot.data[index]['title']}',
+                                            style: TextStyle(
+                                              height: 1.8,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary,
+                                              fontSize: 30,
+                                              fontFamily: 'openSans',
+                                              letterSpacing: 1.2,
+                                            ),
+                                            textAlign: TextAlign.start,
+                                          ),
+                                        ),
+                                        Divider(
+                                          color:
+                                              Color.fromARGB(255, 216, 13, 135),
+                                          height: 20,
+                                        ),
+                                        Container(
+                                          child: Text(
+                                            "Description:"
+                                            '${snapshot.data[index]['description']}',
+                                            style: TextStyle(
+                                              height: 1.8,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary,
+                                              fontSize: 12,
+                                              fontFamily: 'openSans',
+                                              letterSpacing: 1.2,
+                                            ),
+                                            textAlign: TextAlign.start,
+                                          ),
+                                        ),
+                                        Container(
+                                          child: Text(
+                                            "Budget:"
+                                            '${snapshot.data[index]['budget']}',
+                                            style: TextStyle(
+                                              height: 1.8,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary,
+                                              fontSize: 20,
+                                              fontFamily: 'openSans',
+                                              letterSpacing: 1.2,
+                                            ),
+                                            textAlign: TextAlign.start,
+                                          ),
+                                        ),
+                                        ElevatedButton(
+                                            onPressed: () {
+                                              Get.to(
+                                                  DetailDisplayQuestionView(),
+                                                  binding: RespondentBinding(),
+                                                  arguments: {
+                                                    'token':Get.arguments,
+                                                    'data': snapshot.data[index]}
+                                                  );
+                                            
+                                             
+                                            },
+                                            child: Text("Apply",
+                                                style: TextStyle(
+                                                    color: Colors.black)),
+                                            style: ButtonStyle(
+                                              foregroundColor:
+                                                  MaterialStateProperty.all(
+                                                      Colors.red),
+                                            ))
+                                      ],
+                                    ),
+                                  );
+                                 
+                                });
+                          } else {
+                            return Text('error found ');
+                          }
+                        },
+                      ),
+                    ),
                     SizedBox(
                       height: 10,
                     ),
-                    Text(
-                      'Recruit, manage, and interact with respondents',
-                      style: TextStyle(
-                        letterSpacing: 1.2,
-                        color: Theme.of(context).primaryColor,
-                        fontSize: 16,
-                        fontFamily: 'openSans',
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(8),
-                      margin: EdgeInsets.only(left: 10, top: 10),
-                      width: MediaQuery.of(context).size.width * 2 / 3,
-                      decoration: BoxDecoration(
-                          color: Colors.white54,
-                          border: Border(
-                              left: BorderSide(width: 2, color: Colors.blue))),
-                      child: Text(
-                        ' Built-in invitation, scheduling, and chat features. Manage and interact with your participants using the announcement and discussion board features.',
-                        style: TextStyle(
-                          height: 1.8,
-                          color: Theme.of(context).colorScheme.secondary,
-                          fontSize: 12,
-                          fontFamily: 'openSans',
-                          letterSpacing: 1.2,
-                        ),
-                        textAlign: TextAlign.start,
-                      ),
-                    ),
+                    
+                    
+                 
+                   
                     SizedBox(
                       height: 10,
                     ),
-                    Text(
-                      'Easily create and distribute surveys',
-                      style: TextStyle(
-                        letterSpacing: 1.2,
-                        color: Theme.of(context).primaryColor,
-                        fontSize: 16,
-                        fontFamily: 'openSans',
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(8),
-                      margin: EdgeInsets.only(left: 10, top: 10),
-                      width: MediaQuery.of(context).size.width * 2 / 3,
-                      decoration: BoxDecoration(
-                          color: Colors.white54,
-                          border: Border(
-                              left: BorderSide(width: 2, color: Colors.blue))),
-                      child: Text(
-                        ' Design and distribute surveys with a few clicks - create from scratch, use a template, or upload an existing Excel file. Review and export survey data readily available as responses are collected.',
-                        style: TextStyle(
-                          height: 1.8,
-                          color: Theme.of(context).colorScheme.secondary,
-                          fontSize: 12,
-                          fontFamily: 'openSans',
-                          letterSpacing: 1.2,
-                        ),
-                        textAlign: TextAlign.start,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      'Easily create and distribute surveys',
-                      style: TextStyle(
-                        letterSpacing: 1.2,
-                        color: Theme.of(context).primaryColor,
-                        fontSize: 16,
-                        fontFamily: 'openSans',
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(8),
-                      margin: EdgeInsets.only(left: 10, top: 10),
-                      width: MediaQuery.of(context).size.width * 2 / 3,
-                      decoration: BoxDecoration(
-                          color: Colors.white54,
-                          border: Border(
-                              left: BorderSide(width: 2, color: Colors.blue))),
-                      child: Text(
-                        ' Design and distribute surveys with a few clicks - create from scratch, use a template, or upload an existing Excel file. Review and export survey data readily available as responses are collected.',
-                        style: TextStyle(
-                          height: 1.8,
-                          color: Theme.of(context).colorScheme.secondary,
-                          fontSize: 12,
-                          fontFamily: 'openSans',
-                          letterSpacing: 1.2,
-                        ),
-                        textAlign: TextAlign.start,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
+                   
+                
+                   
                   ],
                 ),
               ),

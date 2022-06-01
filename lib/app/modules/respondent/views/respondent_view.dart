@@ -9,10 +9,9 @@ import 'package:osap/app/modules/respondent/views/respondent_wallet_view.dart';
 import '../controllers/respondent_controller.dart';
 import 'package:osap/app/modules/respondent/views/profile_view.dart';
 
-//import '../controllers/researcher_controller.dart';
-//import 'feedback_view.dart';
-
+// ignore: must_be_immutable
 class RespondentView extends GetView<RespondentController> {
+  
   //int currentIndex = 0;
   List<Widget> pages = [
     ReshomeView(),
@@ -92,148 +91,6 @@ class RespondentView extends GetView<RespondentController> {
             )
           ],
         ),
-
-        ///////////////////////////////////////////////////////////////////////////
-        // drawer: Drawer(
-        //   child: Container(
-        //     decoration: BoxDecoration(
-        //         gradient: LinearGradient(
-        //             begin: Alignment.topLeft,
-        //             end: Alignment.bottomRight,
-        //             stops: [
-        //           0.0,
-        //           1.0
-        //         ],
-        //             colors: [
-        //           Theme.of(context).primaryColor.withOpacity(0.2),
-        //           Theme.of(context).colorScheme.secondary.withOpacity(0.3),
-        //         ])),
-        // child: ListView(
-        //   children: [
-        //     DrawerHeader(
-        //       decoration: BoxDecoration(
-        //         color: Theme.of(context).primaryColor,
-        //         gradient: LinearGradient(
-        //           begin: Alignment.topLeft,
-        //           end: Alignment.bottomRight,
-        //           stops: [0.0, 1.0],
-        //           colors: [
-        //             Theme.of(context).primaryColor,
-        //             Theme.of(context).colorScheme.secondary,
-        //           ],
-        //         ),
-        //       ),
-        //       child: CircleAvatar(
-        //         backgroundColor: Colors.white,
-        //         minRadius: 15,
-        //         maxRadius: 30,
-        //         child: Icon(
-        //           Icons.person,
-        //           size: 80,
-        //           color: Colors.grey.shade300,
-        //         ),
-        //       ),
-        //     ),
-        //     ListTile(
-        //       leading: Icon(
-        //         Icons.description_outlined,
-        //         size: _drawerIconSize,
-        //         color: Theme.of(context).colorScheme.secondary,
-        //       ),
-        //       title: Text(
-        //         'Create questioners',
-        //         style: TextStyle(
-        //             fontSize: 17,
-        //             fontFamily: 'openSans',
-        //             color: Theme.of(context).colorScheme.secondary),
-        //       ),
-        //       onTap: () {
-        //         Get.to(QuestioneryView(), binding: ResearcherBinding());
-        //       },
-        //     ),
-        //     Divider(
-        //       color: Theme.of(context).primaryColor,
-        //       height: 1,
-        //     ),
-        //         ListTile(
-        //           leading: Icon(Icons.person_outline_sharp,
-        //               size: _drawerIconSize,
-        //               color: Theme.of(context).colorScheme.secondary),
-        //           title: Text(
-        //             'Profile',
-        //             style: TextStyle(
-        //                 fontFamily: 'openSans',
-        //                 fontSize: _drawerFontSize,
-        //                 color: Theme.of(context).colorScheme.secondary),
-        //           ),
-        //           onTap: () {
-        //             Get.to(ProfileView(), binding: ResearcherBinding());
-        //           },
-        //         ),
-        //         Divider(
-        //           color: Theme.of(context).primaryColor,
-        //           height: 1,
-        //         ),
-        //         ListTile(
-        //           leading: Icon(Icons.feedback_outlined,
-        //               size: _drawerIconSize,
-        //               color: Theme.of(context).colorScheme.secondary),
-        //           title: Text(
-        //             'Feedback',
-        //             style: TextStyle(
-        //                 fontFamily: 'openSans',
-        //                 fontSize: _drawerFontSize,
-        //                 color: Theme.of(context).colorScheme.secondary),
-        //           ),
-        //
-        //         ),
-        //         Divider(
-        //           color: Theme.of(context).primaryColor,
-        //           height: 1,
-        //         ),
-        //         ListTile(
-        //           leading: Icon(
-        //             Icons.slideshow_outlined,
-        //             size: _drawerIconSize,
-        //             color: Theme.of(context).colorScheme.secondary,
-        //           ),
-        //           title: Text(
-        //             'Result',
-        //             style: TextStyle(
-        //                 fontFamily: 'openSans',
-        //                 fontSize: _drawerFontSize,
-        //                 color: Theme.of(context).colorScheme.secondary),
-        //           ),
-        //           onTap: () {
-        //             Get.to(ResultView(), binding: ResearcherBinding());
-        //           },
-        //         ),
-        //         Divider(
-        //           color: Theme.of(context).primaryColor,
-        //           height: 1,
-        //         ),
-        //         ListTile(
-        //           leading: Icon(
-        //             Icons.logout_rounded,
-        //             size: _drawerIconSize,
-        //             color: Theme.of(context).colorScheme.secondary,
-        //           ),
-        //           title: Text(
-        //             'Logout',
-        //             style: TextStyle(
-        //                 fontFamily: 'openSans',
-        //                 fontSize: _drawerFontSize,
-        //                 color: Theme.of(context).colorScheme.secondary),
-        //           ),
-        //           onTap: () {
-        //             Get.offAllNamed(Routes.HOME);
-        //           },
-        //         ),
-        //       ],
-        //     ),
-        //   ),
-        // ),
-/////////////////////
         bottomNavigationBar: Obx(
           () => BottomNavigationBar(
               currentIndex: controller.currentIndex.value,

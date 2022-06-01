@@ -12,9 +12,7 @@ import 'package:osap/app/modules/respondent/bindings/respondent_binding.dart';
 import 'package:osap/app/modules/respondent/views/respondent_view.dart';
 import 'package:osap/app/modules/sign_up/bindings/sign_up_binding.dart';
 import 'package:osap/app/modules/sign_up/views/researcher_sign_up_view.dart';
-import 'package:osap/app/modules/splash_screen/bindings/splash_screen_binding.dart';
 
-import '../../splash_screen/views/splash_screen_view.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
@@ -147,12 +145,42 @@ class LoginView extends GetView<LoginController> {
                                             arguments:
                                                 controller.userToke.value,
                                           );
-                                        } else {
+                                        } else if (value2['roll'] ==
+                                            'Respondent') {
                                           Get.offAll(
                                             RespondentView(),
                                             binding: RespondentBinding(),
                                             arguments:
                                                 controller.userToke.value,
+                                          );
+                                        } else {
+                                          Get.defaultDialog(
+                                            title: 'Error',
+                                            titleStyle: TextStyle(
+                                              fontSize: 16,
+                                              fontFamily: 'openSans',
+                                              letterSpacing: 2,
+                                              color: Color.fromARGB(
+                                                  255, 233, 101, 91),
+                                            ),
+                                            content: Column(
+                                              children: [
+                                                Divider(
+                                                  thickness: 1.5,
+                                                  color: Colors.grey,
+                                                ),
+                                                Text(
+                                                  "invalid user",
+                                                  style: TextStyle(
+                                                    fontSize: 16,
+                                                    fontFamily: 'openSans',
+                                                    letterSpacing: 1.5,
+                                                    color: Color.fromARGB(
+                                                        255, 243, 96, 85),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           );
                                         }
                                       });
