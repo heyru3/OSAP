@@ -8,7 +8,7 @@ environment:
 dependencies: 
   cupertino_icons: ^1.0.2
   font_awesome_flutter: ^10.1.0
-  get: 4.6.1
+  get: 4.6.5
   multiselect: ^0.0.4
   hexcolor: ^2.0.6
   introduction_screen: ^3.0.2
@@ -18,12 +18,14 @@ dependencies:
   date_ranger: 0.0.1
   menu_button: 1.4.2+1
   intl: 0.17.0
+  multi_select_flutter: 4.1.2
   flutter: 
     sdk: flutter
+  group_radio_button: ^1.2.0
 
 dev_dependencies: 
-  flutter_lints: ^1.0.0
-  lints: 1.0.1
+  flutter_lints: ^2.0.1
+  lints: ^2.0.0
   flutter_test: 
     sdk: flutter
 

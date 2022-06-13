@@ -22,7 +22,7 @@ class RespondentView extends GetView<RespondentController> {
 
   @override
   Widget build(BuildContext context) {
-    controller.token.value = Get.arguments;
+    controller.token.value = Get.arguments[1];
 
     return Scaffold(
         appBar: AppBar(

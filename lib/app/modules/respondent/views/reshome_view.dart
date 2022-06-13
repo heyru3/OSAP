@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -10,6 +9,8 @@ import 'package:osap/app/modules/respondent/views/detail_display_question_view.d
 class ReshomeView extends GetView<ReshomeController> {
   @override
   Widget build(BuildContext context) {
+  controller.snackbar.value = Get.arguments[0];
+
     /// controller.token.value = Get.arguments;
 
     // controller.onInit;
@@ -43,7 +44,7 @@ class ReshomeView extends GetView<ReshomeController> {
                     Container(
                       height: MediaQuery.of(context).size.height,
                       child: FutureBuilder(
-                        future: controller.getSurvey(Get.arguments),
+                        future: controller.getSurvey(Get.arguments[1]),
                         builder: (context, AsyncSnapshot snapshot) {
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
@@ -104,34 +105,103 @@ class ReshomeView extends GetView<ReshomeController> {
                                           ),
                                         ),
                                         Container(
-                                          child: Text(
-                                            "Budget:"
-                                            '${snapshot.data[index]['budget']}',
-                                            style: TextStyle(
-                                              height: 1.8,
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .primary,
-                                              fontSize: 20,
-                                              fontFamily: 'openSans',
-                                              letterSpacing: 1.2,
-                                            ),
-                                            textAlign: TextAlign.start,
-                                          ),
-                                        ),
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Text(
+                                                      "Expired Date:"
+                                                      '${snapshot.data[index]['expired_date']}',
+                                                      style: TextStyle(
+                                                        height: 1.8,
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .secondary,
+                                                        fontSize: 12,
+                                                        fontFamily: 'openSans',
+                                                        letterSpacing: 1.2,
+                                                      ),
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                    ),
+                                                  ),
+                                                ])),
+                                        Container(
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Text(
+                                                      "Survey Payment:"
+                                                      '${snapshot.data[index]['budget'] / snapshot.data[index]['required_number_of_respondent']}',
+                                                      style: TextStyle(
+                                                        height: 1.8,
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .secondary,
+                                                        fontSize: 12,
+                                                        fontFamily: 'openSans',
+                                                        letterSpacing: 1.2,
+                                                      ),
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                    ),
+                                                  ),
+                                                ])),
+                                        Container(
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Text(
+                                                      "Status:"
+                                                      '${snapshot.data[index]['number_of_response']}/ ${snapshot.data[index]['required_number_of_respondent']}',
+                                                      style: TextStyle(
+                                                        height: 1.8,
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .secondary,
+                                                        fontSize: 12,
+                                                        fontFamily: 'openSans',
+                                                        letterSpacing: 1.2,
+                                                      ),
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                    ),
+                                                  ),
+                                                ])),
                                         ElevatedButton(
                                             onPressed: () {
                                               Get.to(
                                                   DetailDisplayQuestionView(),
                                                   binding: RespondentBinding(),
                                                   arguments: {
-                                                    'token':Get.arguments,
-                                                    'data': snapshot.data[index]}
-                                                  );
-                                            
-                                             
+                                                    'token': Get.arguments[1],
+                                                    'data': snapshot.data[index]
+                                                  });
                                             },
-                                            child: Text("Apply",
+                                            child: Text("Fill Survey",
                                                 style: TextStyle(
                                                     color: Colors.black)),
                                             style: ButtonStyle(
@@ -142,7 +212,6 @@ class ReshomeView extends GetView<ReshomeController> {
                                       ],
                                     ),
                                   );
-                                 
                                 });
                           } else {
                             return Text('error found ');
@@ -153,16 +222,9 @@ class ReshomeView extends GetView<ReshomeController> {
                     SizedBox(
                       height: 10,
                     ),
-                    
-                    
-                 
-                   
                     SizedBox(
                       height: 10,
                     ),
-                   
-                
-                   
                   ],
                 ),
               ),

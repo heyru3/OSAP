@@ -142,16 +142,18 @@ class LoginView extends GetView<LoginController> {
                                           Get.offAll(
                                             ResearcherView(),
                                             binding: ResearcherBinding(),
+
                                             arguments:
-                                                controller.userToke.value,
+                                                controller.userToke.value
+
                                           );
                                         } else if (value2['roll'] ==
                                             'Respondent') {
                                           Get.offAll(
                                             RespondentView(),
                                             binding: RespondentBinding(),
-                                            arguments:
-                                                controller.userToke.value,
+                                            arguments:[false,
+                                                controller.userToke.value]
                                           );
                                         } else {
                                           Get.defaultDialog(
